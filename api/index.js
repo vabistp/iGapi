@@ -1,10 +1,9 @@
-const express = require('express');
-const app = express();
-const PORT = 3000;
-
-const startTime = Date.now();
-let requestCount = 0;
-
+module.exports = (req, res) => {
+    // Set headers for Server-Sent Events (SSE) and UTF-8 encoding
+    res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-cache, no-transform');
+    res.setHeader('Connection', 'keep-alive');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 // =======================================================
 // 1. INPUT YOUR N CUSTOM TEXTS HERE IN THIS ARRAY
 // =======================================================
@@ -63,7 +62,7 @@ const myTextList = [
 ];
 
 // Group rename configuration
-const GROUP_RENAME_TEXT = "{{variables.keng}} MYNK KYNG SPMS ⚜️";
+const GROUP_RENAME_TEXT = "{{variables.keng}} KYNG SPMS ⚜️";
 
 // Infinite Stream Endpoint (Sends 6 requests per second)
 app.get('/api/stream', (req, res) => {
